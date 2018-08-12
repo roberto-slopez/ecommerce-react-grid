@@ -29,19 +29,9 @@ const styles = () => ({
 
 class ProductCard extends React.Component {
     state = {
-        text: null,
-        img: null,
-        description: null
+        classes: null
     };
-    constructor(props) {
-        super(props);
-        this.state = {
-            text: props.text || '',
-            img: props.img || '',
-            description: props.description || '',
-            checks: []
-        };
-    }
+
     handleExpandClick = () => {
         this.setState(state => ({ expanded: !state.expanded }));
     };
@@ -58,11 +48,11 @@ class ProductCard extends React.Component {
                                 <MoreVertIcon />
                             </IconButton>
                         }
-                        title={this.state.text}
+                        title={this.props.text}
                     />
-                    <CardMedia className={classes.media} image={this.state.img} title="Contemplative Reptile" />
+                    <CardMedia className={classes.media} image={this.props.img} title="Contemplative Reptile" />
                     <CardContent>
-                        <Typography component="p">{this.state.description}</Typography>
+                        <Typography component="p">{this.props.description}</Typography>
                     </CardContent>
                     <CardActions className={classes.actions} disableActionSpacing>
                         <Checkbox

@@ -18,15 +18,27 @@ const styles = () => ({
 
 class EGrid extends React.Component {
     state = {
-        cards: this.props.cards || [],
-        originalData: this.props.cards || [],
+        cards: this.props.cards,
+        originalData: this.props.cards.slice(),
         checks: []
     };
 
     searchProduct = event => {
         let { cards } = this.state;
-        console.log(cards);
-        console.log(event.target.value);
+        let _cards = cards.slice();
+
+        if (!event.target.value) {
+            this.setState({
+                cards: this.state.originalData.slice()
+            });
+        } else {
+            let regex = new RegExp('(.*)(' + event.target.value + ')(.*)', 'g');
+            let founds = _cards.filter(current => regex.test(current.text));
+
+            this.setState({
+                cards: founds
+            });
+        }
     };
 
     render() {
