@@ -1,0 +1,29 @@
+{
+  "name": "ecommerce-react-grid",
+  "version": "0.1.0",
+  "license": "MIT",
+  "dependencies": {
+    "@material-ui/core": "^1.4.3",
+    "@material-ui/icons": "^2.0.1",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "json-loader": "0.5.7",
+    "uglifyjs-webpack-plugin": "^1.2.7",
+    "webpack": "4.16.5",
+    "webpack-cli": "^3.1.0",
+    "webpack-command": "^0.4.1",
+    "webpack-dev-server": "^3.1.5"
+  },
+  "scripts": {
+    "build": "webpack",
+    "server": "webpack-dev-server"
+  }
+}

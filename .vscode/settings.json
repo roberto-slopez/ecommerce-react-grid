@@ -1,0 +1,25 @@
+{
+    "eslint.autoFixOnSave": false,
+    "javascript.format.enable": false,
+    "editor.formatOnSave": false,
+    "eslint.options": {
+        "configFile": "C:\\Users\\json\\.eslintrc.js"
+    },
+    "eslint.alwaysShowStatus": true,
+    "editor.renderWhitespace": "all",
+    "editor.rulers": [
+        120,
+        140
+    ],
+    "workbench.colorTheme": "Material Theme Ocean",
+    "materialTheme.fixIconsRunning": false,
+    "workbench.iconTheme": "eq-material-theme-icons-ocean",
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        {
+            "language": "html",
+            "autoFix": true
+        }
+    ]
+}
