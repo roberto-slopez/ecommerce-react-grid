@@ -36,6 +36,10 @@ class ProductCard extends React.Component {
         this.setState(state => ({ expanded: !state.expanded }));
     };
 
+    static defaultProps = {
+        prefixUrl: ''
+    };
+
     render() {
         const { classes } = this.props;
 
@@ -50,7 +54,7 @@ class ProductCard extends React.Component {
                         }
                         title={this.props.text}
                     />
-                    <CardMedia className={classes.media} image={this.props.img} title="Contemplative Reptile" />
+                    <CardMedia className={classes.media} image={this.props.prefixUrl + this.props.img} title="Contemplative Reptile" />
                     <CardContent>
                         <Typography component="p">{this.props.description}</Typography>
                     </CardContent>
@@ -72,9 +76,10 @@ class ProductCard extends React.Component {
 
 ProductCard.propTypes = {
     classes: PropTypes.object.isRequired,
-    text: PropTypes.object.isRequired,
-    img: PropTypes.object.isRequired,
-    description: PropTypes.object.isRequired
+    text: PropTypes.string,
+    img: PropTypes.string,
+    description: PropTypes.string,
+    prefixUrl: PropTypes.object.string
 };
 
 export default withStyles(styles)(ProductCard);

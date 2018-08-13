@@ -4,9 +4,9 @@ import ReactDOM from 'react-dom';
 import EGrid from './components/EGrid.jsx';
 
 module.exports = {
-    renderAt: function(node, cards) {
+    renderAt: function(node, cards, settings) {
         cards = cards || [];
-        ReactDOM.render(<EGrid cards={cards} />, node);
+        ReactDOM.render(<EGrid cards={cards} settings={settings} />, node);
     },
     destroyAtNode: function(node) {
         ReactDOM.unmountComponentAtNode(node);

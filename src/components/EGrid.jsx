@@ -18,13 +18,14 @@ const styles = () => ({
 
 class EGrid extends React.Component {
     state = {
+        settings: this.props.settings,
         cards: this.props.cards,
         originalData: this.props.cards.slice(),
         checks: []
     };
 
     searchProduct = event => {
-        let { cards } = this.state;
+        let { cards, settings } = this.state;
         let _cards = cards.slice();
 
         if (!event.target.value) {
@@ -33,7 +34,22 @@ class EGrid extends React.Component {
             });
         } else {
             let regex = new RegExp('(.*)(' + event.target.value + ')(.*)', 'g');
-            let founds = _cards.filter(current => regex.test(current.text));
+            let founds = _cards.filter(current => {
+                let second = [];
+
+                if (settings.tagPropertie) {
+                    second = settings.tagPropertie;
+                    let temp = current[second];
+                    if (Array.isArray(temp)) {
+                        temp = temp.slice();
+                        second = temp.filter(i => regex.test(i));
+                    } else {
+                        second = [];
+                    }
+                }
+
+                return regex.test(current.text) || second.length > 0;
+            });
 
             this.setState({
                 cards: founds
@@ -62,7 +78,15 @@ class EGrid extends React.Component {
                     <CardContent>
                         <Grid container spacing={24}>
                             {this.state.cards.map((card, key) => {
-                                return <ProductCard text={card.text} img={card.img} description={card.description} key={key} />;
+                                return (
+                                    <ProductCard
+                                        prefixUrl={this.props.settings.prefixUrl}
+                                        text={card.text}
+                                        img={card.img}
+                                        description={card.description}
+                                        key={key}
+                                    />
+                                );
                             }, this)}
                         </Grid>
                     </CardContent>
@@ -74,7 +98,8 @@ class EGrid extends React.Component {
 
 EGrid.propTypes = {
     classes: PropTypes.object.isRequired,
-    cards: PropTypes.object.isRequired
+    cards: PropTypes.object.isRequired,
+    settings: PropTypes.object
 };
 
 export default withStyles(styles)(EGrid);

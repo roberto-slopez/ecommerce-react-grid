@@ -14,29 +14,46 @@
   <div id="root"></div>
   <script src="./dist/ereactgrid.js"></script>
   <script type="text/javascript">
-    // eslint-disable-next-line
-      EReactGrid.renderAt(document.getElementById('root'), [
+    var data = [
         {
             text: 'Bateria',
             img: 'png',
-            description: 'Una bateria'
+            description: 'Una bateria',
+            tags: ['grande', 'carro', 'luz']
         },
         {
             text: 'Caja',
             img: 'png',
-            description: 'Una bateria2'
+            description: 'Una caja grande',
+            tags: ['compacto', 'uso', 'cable']
         },
         {
             text: 'Rojo',
             img: 'png',
-            description: 'Una bateria3'
+            description: 'Un color para advertencias',
+            tags: ['color', 'primario', 'llamativo']
         },
         {
             text: 'Pila',
             img: 'png',
-            description: 'Una bateria4'
+            description: 'Un de baterias',
+            tags: ['masivo', 'carga', 'empresa']
         }
-    ]);
+    ];
+
+    var settings = {
+        /**
+         * @cfg {string} prefix url like 'https://site.com'
+         */
+        prefixUrl: '',
+        /**
+         * Propertie for second search
+         * @cfg {array} array string
+         */
+        tagPropertie: 'tags'
+    };
+    // eslint-disable-next-line
+      EReactGrid.renderAt(document.getElementById('root'), data, settings);
   </script>
 </body>
 
