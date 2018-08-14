@@ -25,7 +25,7 @@ class EGrid extends React.Component {
     };
 
     searchProduct = event => {
-        let { cards, settings } = this.state;
+        let { cards } = this.state;
         let _cards = cards.slice();
 
         if (!event.target.value) {
@@ -36,16 +36,12 @@ class EGrid extends React.Component {
             let regex = new RegExp('(.*)(' + event.target.value + ')(.*)', 'g');
             let founds = _cards.filter(current => {
                 let second = [];
-
-                if (settings.tagPropertie) {
-                    second = settings.tagPropertie;
-                    let temp = current[second];
-                    if (Array.isArray(temp)) {
-                        temp = temp.slice();
-                        second = temp.filter(i => regex.test(i));
-                    } else {
-                        second = [];
-                    }
+                let temp = current.tags;
+                if (Array.isArray(temp)) {
+                    temp = temp.slice();
+                    second = temp.filter(i => regex.test(i));
+                } else {
+                    second = [];
                 }
 
                 return regex.test(current.text) || second.length > 0;
@@ -84,6 +80,7 @@ class EGrid extends React.Component {
                                         text={card.text}
                                         img={card.img}
                                         description={card.description}
+                                        tags={card.tags || []}
                                         key={key}
                                     />
                                 );

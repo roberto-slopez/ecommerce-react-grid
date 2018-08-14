@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+  <!-- <link rel="manifest" href="./manifest.json"> -->
+  <link rel="shortcut icon" href="./favicon.ico">
+  <title>Ecommerce React Grid</title>
+</head>
+
+<body style="background: #f0f0f0">
+  <h1>Ecommerce React Grid</h1>
+  <div id="root"></div>
+  <script src="./dist/ereactgrid.js"></script>
+  <script type="text/javascript">
+    var data = [
+        {
+            text: 'deluvio',
+            img: 'charles-deluvio-695736-unsplash.jpg',
+            description: 'Planta',
+            tags: ['verde', 'natural', 'Naranja']
+        },
+        {
+            text: 'russell',
+            img: 'felix-russell-saw-234903-unsplash.jpg',
+            description: 'Gran foto',
+            tags: ['carro', 'luz', 'bateria']
+        },
+        {
+            text: 'kui',
+            img: 'kui-ye-chen-359084-unsplash.jpg',
+            description: 'Air-Pods',
+            tags: ['apple', 'blanco', 'sonido']
+        },
+        {
+            text: 'mrigendra',
+            img: 'mrigendra-chauhan-600-unsplash.jpg',
+            description: 'Camion',
+            tags: ['camion', 'atardecer', 'carretera']
+        },
+        {
+            text: 'pat',
+            img: 'pat-kwon-603556-unsplash.jpg',
+            description: 'Game boy',
+            tags: ['amarillo', 'botones', 'color']
+        },
+        {
+            text: 'vinicius',
+            img: 'vinicius-amano-386864-unsplash.jpg',
+            description: 'Phone',
+            tags: ['amarillo', 'verde', 'azul', 'blanco', 'playa']
+        }
+    ];
+
+    var settings = {
+        /**
+         * @cfg {string} prefix url like 'https://site.com'
+         */
+        prefixUrl: 'img/'
+    };
+    // eslint-disable-next-line
+    EReactGrid.renderAt(document.getElementById('root'), data, settings);
+  </script>
+</body>
+
+</html>

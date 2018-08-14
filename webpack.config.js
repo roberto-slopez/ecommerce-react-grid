@@ -9,12 +9,12 @@ const path = require('path');
 module.exports = {
     mode: 'development', // "production" | "development" | "none"
     devServer: {
-        contentBase: path.resolve(__dirname, 'public')
+        contentBase: path.resolve(__dirname)
     },
     entry: path.resolve(__dirname, 'src', 'index.jsx'),
     output: {
         filename: 'ereactgrid.js',
-        path: path.resolve(__dirname, 'public', 'dist'),
+        path: path.resolve(__dirname, 'dist'),
         // export itself to a global var
         libraryTarget: 'var',
         // name of the global var: "Foo"

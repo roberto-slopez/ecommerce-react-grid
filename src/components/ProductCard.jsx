@@ -6,15 +6,18 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import IconButton from '@material-ui/core/IconButton';
+//import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Checkbox from '@material-ui/core/Checkbox';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+//import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Add from '@material-ui/icons/Add';
 import Done from '@material-ui/icons/Done';
 import Grid from '@material-ui/core/Grid';
+import Avatar from '@material-ui/core/Avatar';
+import Chip from '@material-ui/core/Chip';
+import LocalOffer from '@material-ui/icons/LocalOffer';
 
-const styles = () => ({
+const styles = theme => ({
     card: {
         maxWidth: 400
     },
@@ -22,8 +25,13 @@ const styles = () => ({
         height: 0,
         paddingTop: '56.25%' // 16:9
     },
+    chip: {
+        margin: theme.spacing.unit
+    },
     actions: {
-        display: 'flex'
+        display: 'flex',
+        justifyContent: 'center',
+        flexWrap: 'wrap'
     }
 });
 
@@ -48,9 +56,14 @@ class ProductCard extends React.Component {
                 <Card className={classes.card}>
                     <CardHeader
                         action={
-                            <IconButton>
-                                <MoreVertIcon />
-                            </IconButton>
+                            <Checkbox
+                                icon={<Add />}
+                                checkedIcon={<Done />}
+                                //checked={this.state.checkedB}
+                                //onChange={this.handleChange('checkedB')}
+                                value="true"
+                                color="primary"
+                            />
                         }
                         title={this.props.text}
                     />
@@ -59,14 +72,20 @@ class ProductCard extends React.Component {
                         <Typography component="p">{this.props.description}</Typography>
                     </CardContent>
                     <CardActions className={classes.actions} disableActionSpacing>
-                        <Checkbox
-                            icon={<Add />}
-                            checkedIcon={<Done />}
-                            //checked={this.state.checkedB}
-                            //onChange={this.handleChange('checkedB')}
-                            value="true"
-                            color="primary"
-                        />
+                        {this.props.tags.map((tag, key) => {
+                            return (
+                                <Chip
+                                    key={key}
+                                    avatar={
+                                        <Avatar>
+                                            <LocalOffer />
+                                        </Avatar>
+                                    }
+                                    label={tag}
+                                    className={classes.chip}
+                                />
+                            );
+                        }, this)}
                     </CardActions>
                 </Card>
             </Grid>
@@ -79,7 +98,8 @@ ProductCard.propTypes = {
     text: PropTypes.string,
     img: PropTypes.string,
     description: PropTypes.string,
-    prefixUrl: PropTypes.object.string
+    prefixUrl: PropTypes.object.string,
+    tags: PropTypes.array
 };
 
 export default withStyles(styles)(ProductCard);
