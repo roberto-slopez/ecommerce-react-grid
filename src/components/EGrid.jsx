@@ -7,12 +7,27 @@ import Search from '@material-ui/icons/Search';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
+import Toolbar from '@material-ui/core/Toolbar';
+import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
+import AttachMoney from '@material-ui/icons/AttachMoney';
 
+import AppSearch from './AppSearch';
 import ProductCard from './ProductCard';
 
-const styles = () => ({
+const styles = theme => ({
     root: {
         flexGrow: 1
+    },
+    button: {
+        margin: theme.spacing.unit,
+        color: '#FFFFFF'
+    },
+    extendedIcon: {
+        marginRight: theme.spacing.unit
+    },
+    colorPrimary: {
+        background: '#FEC503'
     }
 });
 
@@ -66,19 +81,15 @@ class EGrid extends React.Component {
         return (
             <div className={classes.root}>
                 <Card>
-                    <CardHeader
-                        title={
-                            <Grid container spacing={8} alignItems="flex-end">
-                                <Grid item>
-                                    <Search />
-                                </Grid>
-                                <Grid item>
-                                    <TextField id="search" label="Buscar" type="search" margin="normal" onChange={this.searchProduct} />
-                                </Grid>
-                            </Grid>
-                        }
-                    />
-
+                    <AppBar position="static" className={classes.colorPrimary} style={{ boxShadow: 'none' }}>
+                        <Toolbar>
+                            <Button aria-label="cotizar" className={classes.button}>
+                                <AttachMoney className={classes.extendedIcon} />
+                                Cotizar
+                            </Button>
+                            <AppSearch handleKeyDown={this.searchProduct} />
+                        </Toolbar>
+                    </AppBar>
                     <CardContent>
                         <Grid container spacing={32}>
                             {this.state.cards.map((card, key) => {
