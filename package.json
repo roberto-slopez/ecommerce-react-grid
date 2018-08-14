@@ -2,6 +2,20 @@
   "name": "ecommerce-react-grid",
   "version": "0.1.0",
   "license": "MIT",
+  "description": "Portafolio",
+  "main": "index.html",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roberto-slopez/ecommerce-react-grid.git"
+  },
+  "keywords": [
+      "ecommerce", "react", "grid"
+  ],
+  "author": "roberto_slopez",
+  "bugs": {
+      "url": "https://github.com/roberto-slopez/ecommerce-react-grid/issues"
+  },
+  "homepage": "https://github.com/roberto-slopez/ecommerce-react-grid#readme",
   "dependencies": {
     "@material-ui/core": "^1.4.3",
     "@material-ui/icons": "^2.0.1",

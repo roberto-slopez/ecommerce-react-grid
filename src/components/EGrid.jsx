@@ -24,30 +24,38 @@ class EGrid extends React.Component {
         checks: []
     };
 
+    normalize = str =>
+        str
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .toLocaleLowerCase();
+
     searchProduct = event => {
-        let { cards } = this.state;
+        let _this = this;
+        let { cards } = _this.state;
         let _cards = cards.slice();
 
         if (!event.target.value) {
-            this.setState({
-                cards: this.state.originalData.slice()
+            _this.setState({
+                cards: _this.state.originalData.slice()
             });
         } else {
-            let regex = new RegExp('(.*)(' + event.target.value + ')(.*)', 'g');
+            let regex = new RegExp('(.*)(' + _this.normalize(event.target.value) + ')(.*)', 'g');
+
             let founds = _cards.filter(current => {
                 let second = [];
                 let temp = current.tags;
                 if (Array.isArray(temp)) {
                     temp = temp.slice();
-                    second = temp.filter(i => regex.test(i));
+                    second = temp.filter(i => regex.test(_this.normalize(i)));
                 } else {
                     second = [];
                 }
 
-                return regex.test(current.text) || second.length > 0;
+                return regex.test(_this.normalize(current.text)) || second.length > 0;
             });
 
-            this.setState({
+            _this.setState({
                 cards: founds
             });
         }
