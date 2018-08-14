@@ -67,7 +67,7 @@ class EGrid extends React.Component {
             <div className={classes.root}>
                 <Card>
                     <CardHeader
-                        action={
+                        title={
                             <Grid container spacing={8} alignItems="flex-end">
                                 <Grid item>
                                     <Search />
@@ -80,7 +80,7 @@ class EGrid extends React.Component {
                     />
 
                     <CardContent>
-                        <Grid container spacing={24}>
+                        <Grid container spacing={32}>
                             {this.state.cards.map((card, key) => {
                                 return (
                                     <ProductCard

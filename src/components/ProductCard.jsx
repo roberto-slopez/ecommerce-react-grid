@@ -21,6 +21,9 @@ const styles = theme => ({
     card: {
         maxWidth: 400
     },
+    rootGrid: {
+        paddingTop: '10px'
+    },
     media: {
         height: 0,
         paddingTop: '56.25%' // 16:9
@@ -52,7 +55,7 @@ class ProductCard extends React.Component {
         const { classes } = this.props;
 
         return (
-            <Grid item xs={3}>
+            <Grid xs={12} sm={3} className={classes.rootGrid}>
                 <Card className={classes.card}>
                     <CardHeader
                         action={
