@@ -9,16 +9,16 @@
 ```js
     var settings = {
         /**
-        * @cfg {function} callback
-        */
+         * @cfg {function} callback
+         */
         getChecks: function(data) {
             console.log(data);
             return;
         },
         translation: {
             /**
-            * @cfg {string} add translation to the button that gets all the checks
-            */
+             * @cfg {string} add translation to the button that gets all the checks
+             */
             getchecks: 'Cotizar'
         },
         /**
