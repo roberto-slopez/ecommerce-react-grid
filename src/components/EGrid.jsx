@@ -1,16 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import Search from '@material-ui/icons/Search';
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import AttachMoney from '@material-ui/icons/AttachMoney';
+import { lensPath, set } from 'ramda';
 
 import AppSearch from './AppSearch';
 import ProductCard from './ProductCard';
@@ -35,8 +33,7 @@ class EGrid extends React.Component {
     state = {
         settings: this.props.settings,
         cards: this.props.cards,
-        originalData: this.props.cards.slice(),
-        checks: []
+        originalData: this.props.cards.slice()
     };
 
     normalize = str =>
@@ -46,34 +43,38 @@ class EGrid extends React.Component {
             .toLocaleLowerCase();
 
     searchProduct = event => {
-        let _this = this;
-        let { cards } = _this.state;
-        let _cards = cards.slice();
+        let updatedList = this.state.originalData;
+        updatedList = updatedList.filter(current => {
+            let second = [];
+            let isValid = this.normalize(current.text).search(event.target.value.toLowerCase()) !== -1;
 
-        if (!event.target.value) {
-            _this.setState({
-                cards: _this.state.originalData.slice()
-            });
-        } else {
-            let regex = new RegExp('(.*)(' + _this.normalize(event.target.value) + ')(.*)', 'g');
+            if (Array.isArray(current.tags)) {
+                second = current.tags.filter(i => this.normalize(i).search(event.target.value.toLowerCase()) !== -1);
+            }
 
-            let founds = _cards.filter(current => {
-                let second = [];
-                let temp = current.tags;
-                if (Array.isArray(temp)) {
-                    temp = temp.slice();
-                    second = temp.filter(i => regex.test(_this.normalize(i)));
-                } else {
-                    second = [];
-                }
+            return isValid || second.length > 0;
+        });
 
-                return regex.test(_this.normalize(current.text)) || second.length > 0;
-            });
+        this.setState({ cards: updatedList });
+    };
 
-            _this.setState({
-                cards: founds
-            });
-        }
+    /**
+     * Dynamic modify object
+     * @param {string} fieldPath name path object
+     * @param {string|int} value value to assign in path
+     */
+    setObjectByPath(fieldPath, value) {
+        this.setState({
+            cards: set(lensPath(fieldPath), value, this.state.cards)
+        });
+    }
+
+    handleExpandClick = correlative => {
+        this.setObjectByPath([correlative, 'isChecked'], !this.state.cards[correlative].isChecked);
+    };
+
+    getCheckeds = () => {
+        console.log(this.state.cards.filter(i => i.isChecked));
     };
 
     render() {
@@ -83,7 +84,7 @@ class EGrid extends React.Component {
                 <Card>
                     <AppBar position="static" className={classes.colorPrimary} style={{ boxShadow: 'none' }}>
                         <Toolbar>
-                            <Button aria-label="cotizar" className={classes.button}>
+                            <Button onClick={this.getCheckeds} aria-label="cotizar" className={classes.button}>
                                 <AttachMoney className={classes.extendedIcon} />
                                 Cotizar
                             </Button>
@@ -95,11 +96,14 @@ class EGrid extends React.Component {
                             {this.state.cards.map((card, key) => {
                                 return (
                                     <ProductCard
+                                        handleExpandClick={this.handleExpandClick}
                                         prefixUrl={this.props.settings.prefixUrl}
                                         text={card.text}
                                         img={card.img}
                                         description={card.description}
                                         tags={card.tags || []}
+                                        isChecked={card.isChecked}
+                                        correlative={key}
                                         key={key}
                                     />
                                 );

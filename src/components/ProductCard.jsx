@@ -44,7 +44,7 @@ class ProductCard extends React.Component {
     };
 
     handleExpandClick = () => {
-        this.setState(state => ({ expanded: !state.expanded }));
+        this.props.handleExpandClick(this.props.correlative);
     };
 
     static defaultProps = {
@@ -62,8 +62,8 @@ class ProductCard extends React.Component {
                             <Checkbox
                                 icon={<Add />}
                                 checkedIcon={<Done />}
-                                //checked={this.state.checkedB}
-                                //onChange={this.handleChange('checkedB')}
+                                checked={this.props.isChecked}
+                                onChange={this.handleExpandClick}
                                 value="true"
                                 color="primary"
                             />
@@ -102,7 +102,10 @@ ProductCard.propTypes = {
     img: PropTypes.string,
     description: PropTypes.string,
     prefixUrl: PropTypes.object.string,
-    tags: PropTypes.array
+    tags: PropTypes.array,
+    isChecked: PropTypes.bool,
+    correlative: PropTypes.init,
+    handleExpandClick: PropTypes.function
 };
 
 export default withStyles(styles)(ProductCard);
