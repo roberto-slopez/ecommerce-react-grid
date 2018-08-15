@@ -44,7 +44,7 @@ class ProductCard extends React.Component {
     };
 
     handleCheck = () => {
-        this.props.handleCheck(this.props.correlative);
+        this.props.handleCheck(this.props.unique);
     };
 
     static defaultProps = {
@@ -104,7 +104,7 @@ ProductCard.propTypes = {
     prefixUrl: PropTypes.object.string,
     tags: PropTypes.array,
     isChecked: PropTypes.bool,
-    correlative: PropTypes.init,
+    unique: PropTypes.string,
     handleCheck: PropTypes.function
 };
 

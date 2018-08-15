@@ -62,15 +62,29 @@ class EGrid extends React.Component {
      * Dynamic modify object
      * @param {string} fieldPath name path object
      * @param {string|int} value value to assign in path
+     * @param {string} ref value to assign in path
      */
-    setObjectByPath(fieldPath, value) {
-        this.setState({
-            cards: set(lensPath(fieldPath), value, this.state.cards)
-        });
+    updateList(fieldPath, value, ref) {
+        let obj = {};
+
+        obj[ref] = set(lensPath(fieldPath), value, this.state[ref]);
+        this.setState(obj);
     }
 
-    handleCheck = correlative => {
-        this.setObjectByPath([correlative, 'isChecked'], !this.state.cards[correlative].isChecked);
+    handleCheck = unique => {
+        this.setUpdate('originalData', unique);
+        //Partial update
+        this.setUpdate('cards', unique);
+    };
+
+    setUpdate = (name, unique) => {
+        let correlative = this.state[name]
+            .map(function(e) {
+                return e.unique;
+            })
+            .indexOf(unique);
+
+        this.updateList([correlative, 'isChecked'], !this.state[name][correlative].isChecked, name);
     };
 
     getCheckeds = () => {
@@ -103,7 +117,7 @@ class EGrid extends React.Component {
                                         description={card.description}
                                         tags={card.tags || []}
                                         isChecked={card.isChecked}
-                                        correlative={key}
+                                        unique={card.unique}
                                         key={key}
                                     />
                                 );
