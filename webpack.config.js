@@ -7,7 +7,7 @@ const babelstage0 = require('babel-preset-stage-0');
 const path = require('path');
 
 module.exports = {
-    mode: 'development', // "production" | "development" | "none"
+    mode: 'production', // "production" | "development" | "none"
     devServer: {
         contentBase: path.resolve(__dirname)
     },
@@ -54,6 +54,7 @@ module.exports = {
         new UglifyJsPlugin({
             test: /\.js($|\?)/i,
             uglifyOptions: {
+                compress: true,
                 ecma: 5,
                 ie8: true,
                 safari10: true

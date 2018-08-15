@@ -31,7 +31,6 @@ const styles = theme => ({
 
 class EGrid extends React.Component {
     state = {
-        settings: this.props.settings,
         cards: this.props.cards,
         originalData: this.props.cards.slice()
     };
@@ -88,7 +87,7 @@ class EGrid extends React.Component {
     };
 
     getCheckeds = () => {
-        console.log(this.state.cards.filter(i => i.isChecked));
+        this.props.settings.getChecks(this.state.cards.filter(i => i.isChecked));
     };
 
     render() {
@@ -98,9 +97,13 @@ class EGrid extends React.Component {
                 <Card>
                     <AppBar position="static" className={classes.colorPrimary} style={{ boxShadow: 'none' }}>
                         <Toolbar>
-                            <Button onClick={this.getCheckeds} aria-label="cotizar" className={classes.button}>
+                            <Button
+                                onClick={this.getCheckeds}
+                                aria-label={this.props.settings.translation.getchecks}
+                                className={classes.button}
+                            >
                                 <AttachMoney className={classes.extendedIcon} />
-                                Cotizar
+                                {this.props.settings.translation.getchecks}
                             </Button>
                             <AppSearch handleKeyDown={this.searchProduct} />
                         </Toolbar>
