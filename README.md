@@ -5,18 +5,7 @@
 - node: Is the html node where the component is rendered
 - data: Is data ¯\\_(ツ)_/¯
 - settings:
-NOTE: Data structure
-```js
-    var data = [
-        {
-            unique: '506',
-            text: 'deluvio',
-            img: 'img-unsplash.jpg',
-            description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-            tags: ['blue', 'red', 'white']
-        }
-    ];
-```
+
 ```js
     var settings = {
         /**
@@ -39,5 +28,16 @@ NOTE: Data structure
     };
 
     EReactGrid.renderAt(document.getElementById('root'), data, settings);
-
+```
+NOTE: Data structure
+```js
+    var data = [
+        {
+            unique: '506',
+            text: 'deluvio',
+            img: 'img-unsplash.jpg',
+            description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+            tags: ['blue', 'red', 'white']
+        }
+    ];
 ```
