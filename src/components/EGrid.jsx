@@ -69,7 +69,7 @@ class EGrid extends React.Component {
         });
     }
 
-    handleExpandClick = correlative => {
+    handleCheck = correlative => {
         this.setObjectByPath([correlative, 'isChecked'], !this.state.cards[correlative].isChecked);
     };
 
@@ -96,7 +96,7 @@ class EGrid extends React.Component {
                             {this.state.cards.map((card, key) => {
                                 return (
                                     <ProductCard
-                                        handleExpandClick={this.handleExpandClick}
+                                        handleCheck={this.handleCheck}
                                         prefixUrl={this.props.settings.prefixUrl}
                                         text={card.text}
                                         img={card.img}

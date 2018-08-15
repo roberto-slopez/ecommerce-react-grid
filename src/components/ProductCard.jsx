@@ -43,8 +43,8 @@ class ProductCard extends React.Component {
         classes: null
     };
 
-    handleExpandClick = () => {
-        this.props.handleExpandClick(this.props.correlative);
+    handleCheck = () => {
+        this.props.handleCheck(this.props.correlative);
     };
 
     static defaultProps = {
@@ -63,7 +63,7 @@ class ProductCard extends React.Component {
                                 icon={<Add />}
                                 checkedIcon={<Done />}
                                 checked={this.props.isChecked}
-                                onChange={this.handleExpandClick}
+                                onChange={this.handleCheck}
                                 value="true"
                                 color="primary"
                             />
@@ -105,7 +105,7 @@ ProductCard.propTypes = {
     tags: PropTypes.array,
     isChecked: PropTypes.bool,
     correlative: PropTypes.init,
-    handleExpandClick: PropTypes.function
+    handleCheck: PropTypes.function
 };
 
 export default withStyles(styles)(ProductCard);
