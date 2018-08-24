@@ -7,7 +7,9 @@ import CardContent from '@material-ui/core/CardContent';
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
-import AttachMoney from '@material-ui/icons/AttachMoney';
+import MonetizationOn from '@material-ui/icons/MonetizationOn';
+import Avatar from '@material-ui/core/Avatar';
+
 import { lensPath, set } from 'ramda';
 
 import AppSearch from './AppSearch';
@@ -21,11 +23,17 @@ const styles = theme => ({
         margin: theme.spacing.unit,
         color: '#FFFFFF'
     },
+    flex: {
+        flexGrow: 1
+    },
+    avatar: {
+        margin: 10
+    },
     extendedIcon: {
         marginRight: theme.spacing.unit
     },
     colorPrimary: {
-        background: '#FEC503'
+        background: '#FFD600'
     }
 });
 
@@ -92,20 +100,27 @@ class EGrid extends React.Component {
 
     render() {
         const { classes } = this.props;
+
         return (
             <div className={classes.root}>
                 <Card>
-                    <AppBar position="static" className={classes.colorPrimary} style={{ boxShadow: 'none' }}>
+                    <AppBar
+                        position="static"
+                        className={classes.colorPrimary}
+                        style={{ boxShadow: 'none', background: this.props.settings.brandColor }}
+                    >
                         <Toolbar>
                             <Button
                                 onClick={this.getCheckeds}
                                 aria-label={this.props.settings.translation.getchecks}
                                 className={classes.button}
                             >
-                                <AttachMoney className={classes.extendedIcon} />
+                                <MonetizationOn className={classes.extendedIcon} />
                                 {this.props.settings.translation.getchecks}
                             </Button>
                             <AppSearch handleKeyDown={this.searchProduct} />
+                            <span className={classes.flex} />
+                            <Avatar alt={this.props.settings.brandAlt} src={this.props.settings.brandLogo} className={classes.avatar} />
                         </Toolbar>
                     </AppBar>
                     <CardContent>

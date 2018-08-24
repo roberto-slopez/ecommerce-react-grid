@@ -69,17 +69,35 @@
     ];
 
     var settings = {
+        /**
+         * @cfg {function} callback
+         */
         getChecks: function(data) {
             console.log(data);
             return;
         },
         translation: {
+            /**
+             * @cfg {string} add translation to the button that gets all the checks
+             */
             getchecks: 'Cotizar'
         },
         /**
-         * @cfg {string} prefix url like 'https://site.com'
+         * @cfg {string} prefix url use for complete absolute file paths o relative paths, like 'https://site.com' o 'images/'
          */
-        prefixUrl: 'img/'
+        prefixUrl: 'img/',
+        /**
+         * @cfg {string} logo url or path
+         */
+        brandLogo: 'img/brandlogo.png',
+        /**
+         * @cfg {string} alt for img brand logo
+         */
+        brandAlt: 'brandlogo',
+        /**
+         * @cfg {string} brand color
+         */
+        brandColor: '#311B92'
     };
     // eslint-disable-next-line
     EReactGrid.renderAt(document.getElementById('root'), data, settings);

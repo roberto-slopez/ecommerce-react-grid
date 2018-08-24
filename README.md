@@ -24,7 +24,19 @@
         /**
          * @cfg {string} prefix url use for complete absolute file paths o relative paths, like 'https://site.com' o 'images/'
          */
-        prefixUrl: 'img/'
+        prefixUrl: 'img/',
+                /**
+         * @cfg {string} logo url or path
+         */
+        brandLogo: 'img/brandlogo.png', :new:
+        /**
+         * @cfg {string} alt for img brand logo
+         */
+        brandAlt: 'brandlogo', :new:
+        /**
+         * @cfg {string} brand color
+         */
+        brandColor: '#311B92' :new:
     };
 
     EReactGrid.renderAt(document.getElementById('root'), data, settings);
