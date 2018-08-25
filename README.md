@@ -27,7 +27,7 @@
          * @cfg {string} prefix url use for complete absolute file paths o relative paths, like 'https://site.com' o 'images/'
          */
         prefixUrl: 'img/',
-                /**
+        /**
          * @cfg {string} logo url or path
          */
         brandLogo: 'img/brandlogo.png',
