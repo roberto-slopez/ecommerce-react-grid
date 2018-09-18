@@ -16,6 +16,7 @@ import Chip from '@material-ui/core/Chip';
 import LocalOffer from '@material-ui/icons/LocalOffer';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import Tooltip from '@material-ui/core/Tooltip';
+import { withBounce } from 'react-motions';
 
 const styles = theme => ({
     card: {
@@ -59,7 +60,7 @@ class ProductCard extends React.Component {
             <Grid xs={12} sm={3} className={classes.rootGrid}>
                 <Card className={classes.card}>
                     <CardHeader
-                        action={
+                        action={withBounce(
                             <Checkbox
                                 icon={<Add />}
                                 checkedIcon={<Done />}
@@ -68,7 +69,7 @@ class ProductCard extends React.Component {
                                 value="true"
                                 color="primary"
                             />
-                        }
+                        )}
                         title={
                             <Typography variant="title" gutterBottom>
                                 {this.props.text}
