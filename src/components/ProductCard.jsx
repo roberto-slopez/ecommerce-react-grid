@@ -6,30 +6,31 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-//import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Checkbox from '@material-ui/core/Checkbox';
-//import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Add from '@material-ui/icons/Add';
 import Done from '@material-ui/icons/Done';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
 import LocalOffer from '@material-ui/icons/LocalOffer';
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const styles = theme => ({
     card: {
-        maxWidth: 400
+        maxWidth: 400,
+        height: '100%'
     },
     rootGrid: {
-        paddingTop: '10px'
+        paddingTop: theme.spacing.unit * 2
     },
     media: {
         height: 0,
-        paddingTop: '56.25%' // 16:9
+        paddingTop: '56.25%'
     },
     chip: {
-        margin: theme.spacing.unit
+        margin: 0.5
     },
     actions: {
         display: 'flex',
@@ -68,7 +69,18 @@ class ProductCard extends React.Component {
                                 color="primary"
                             />
                         }
-                        title={this.props.text}
+                        title={
+                            <Typography variant="title" gutterBottom>
+                                {this.props.text}
+                                {this.props.onSale ? (
+                                    <Tooltip title="On Sale" placement="right-start">
+                                        <LocalOffer color="secondary" />
+                                    </Tooltip>
+                                ) : (
+                                    ''
+                                )}
+                            </Typography>
+                        }
                     />
                     <CardMedia className={classes.media} image={this.props.prefixUrl + this.props.img} title="Contemplative Reptile" />
                     <CardContent>
@@ -81,7 +93,7 @@ class ProductCard extends React.Component {
                                     key={key}
                                     avatar={
                                         <Avatar>
-                                            <LocalOffer />
+                                            <KeyboardArrowRight />
                                         </Avatar>
                                     }
                                     label={tag}
@@ -104,6 +116,7 @@ ProductCard.propTypes = {
     prefixUrl: PropTypes.object.string,
     tags: PropTypes.array,
     isChecked: PropTypes.bool,
+    onSale: PropTypes.bool,
     unique: PropTypes.string,
     handleCheck: PropTypes.function
 };

@@ -85,12 +85,7 @@ class EGrid extends React.Component {
     };
 
     setUpdate = (name, unique) => {
-        let correlative = this.state[name]
-            .map(function(e) {
-                return e.unique;
-            })
-            .indexOf(unique);
-
+        let correlative = this.state[name].map(i => i.unique).indexOf(unique);
         this.updateList([correlative, 'isChecked'], !this.state[name][correlative].isChecked, name);
     };
 
@@ -124,7 +119,7 @@ class EGrid extends React.Component {
                         </Toolbar>
                     </AppBar>
                     <CardContent>
-                        <Grid container spacing={32}>
+                        <Grid container spacing={40} direction="row" justify="flex-start" alignItems="stretch">
                             {this.state.cards.map((card, key) => {
                                 return (
                                     <ProductCard
@@ -132,6 +127,7 @@ class EGrid extends React.Component {
                                         prefixUrl={this.props.settings.prefixUrl}
                                         text={card.text}
                                         img={card.img}
+                                        onSale={card.onSale}
                                         description={card.description}
                                         tags={card.tags || []}
                                         isChecked={card.isChecked}
