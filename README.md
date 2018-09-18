@@ -5,7 +5,9 @@
 - node: Is the html node where the component is rendered
 - data: Is data ¯\\_(ツ)_/¯
 - settings:
-
+    - brandLogo :new:
+    - brandAlt :new:
+    - brandColor :new:
 ```js
     var settings = {
         /**
@@ -25,18 +27,18 @@
          * @cfg {string} prefix url use for complete absolute file paths o relative paths, like 'https://site.com' o 'images/'
          */
         prefixUrl: 'img/',
-                /**
+        /**
          * @cfg {string} logo url or path
          */
-        brandLogo: 'img/brandlogo.png', :new:
+        brandLogo: 'img/brandlogo.png',
         /**
          * @cfg {string} alt for img brand logo
          */
-        brandAlt: 'brandlogo', :new:
+        brandAlt: 'brandlogo',
         /**
          * @cfg {string} brand color
          */
-        brandColor: '#311B92' :new:
+        brandColor: '#311B92'
     };
 
     EReactGrid.renderAt(document.getElementById('root'), data, settings);
