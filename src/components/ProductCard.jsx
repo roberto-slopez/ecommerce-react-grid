@@ -16,15 +16,17 @@ import Chip from '@material-ui/core/Chip';
 import LocalOffer from '@material-ui/icons/LocalOffer';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import Tooltip from '@material-ui/core/Tooltip';
-import { withBounce } from 'react-motions';
+// TODO: implementar otra forma de animar el signo de agregar
+// import { withBounce } from 'react-motions';
 
 const styles = theme => ({
     card: {
         maxWidth: 400,
+        margin: 2,
         height: '100%'
     },
     rootGrid: {
-        paddingTop: theme.spacing.unit * 2
+        paddingTop: theme.spacing.unit * 5
     },
     media: {
         height: 0,
@@ -60,16 +62,18 @@ class ProductCard extends React.Component {
             <Grid xs={12} sm={3} className={classes.rootGrid}>
                 <Card className={classes.card}>
                     <CardHeader
-                        action={withBounce(
-                            <Checkbox
-                                icon={<Add />}
-                                checkedIcon={<Done />}
-                                checked={this.props.isChecked}
-                                onChange={this.handleCheck}
-                                value="true"
-                                color="primary"
-                            />
-                        )}
+                        action={
+                            <Tooltip title="Agregar" placement="top">
+                                <Checkbox
+                                    icon={<Add />}
+                                    checkedIcon={<Done />}
+                                    checked={this.props.isChecked}
+                                    onChange={this.handleCheck}
+                                    value="true"
+                                    color="primary"
+                                />
+                            </Tooltip>
+                        }
                         title={
                             <Typography variant="title" gutterBottom>
                                 {this.props.text}
