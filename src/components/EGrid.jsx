@@ -6,9 +6,9 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Toolbar from '@material-ui/core/Toolbar';
 import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
 import MonetizationOn from '@material-ui/icons/MonetizationOn';
 import Avatar from '@material-ui/core/Avatar';
+import Fab from '@material-ui/core/Fab';
 
 import { lensPath, set } from 'ramda';
 
@@ -34,6 +34,14 @@ const styles = theme => ({
     },
     colorPrimary: {
         background: '#FFD600'
+    },
+    fab: {
+        margin: 0,
+        top: 'auto',
+        right: 20,
+        bottom: 20,
+        left: 'auto',
+        position: 'fixed'
     }
 });
 
@@ -105,20 +113,20 @@ class EGrid extends React.Component {
                         style={{ boxShadow: 'none', background: this.props.settings.brandColor }}
                     >
                         <Toolbar>
-                            <Button
-                                onClick={this.getCheckeds}
-                                aria-label={this.props.settings.translation.getchecks}
-                                className={classes.button}
-                            >
-                                <MonetizationOn className={classes.extendedIcon} />
-                                {this.props.settings.translation.getchecks}
-                            </Button>
                             <AppSearch handleKeyDown={this.searchProduct} />
                             <span className={classes.flex} />
                             <Avatar alt={this.props.settings.brandAlt} src={this.props.settings.brandLogo} className={classes.avatar} />
                         </Toolbar>
                     </AppBar>
                     <CardContent>
+                        <Fab
+                            color="secondary"
+                            className={classes.fab}
+                            onClick={this.getCheckeds}
+                            aria-label={this.props.settings.translation.getchecks}
+                        >
+                            <MonetizationOn />
+                        </Fab>
                         <Grid container spacing={40} direction="row" justify="flex-start" alignItems="stretch">
                             {this.state.cards.map((card, key) => {
                                 return (

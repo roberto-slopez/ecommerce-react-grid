@@ -15,6 +15,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
 import LocalOffer from '@material-ui/icons/LocalOffer';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import AttachMoney from '@material-ui/icons/AttachMoney';
 import Tooltip from '@material-ui/core/Tooltip';
 // TODO: implementar otra forma de animar el signo de agregar
 // import { withBounce } from 'react-motions';
@@ -84,6 +85,7 @@ class ProductCard extends React.Component {
                                 ) : (
                                     ''
                                 )}
+                                <Chip icon={<AttachMoney />} color="primary" label={'50 USD'} className={classes.chip} />
                             </Typography>
                         }
                     />

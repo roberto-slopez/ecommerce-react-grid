@@ -11,7 +11,7 @@
         120,
         140
     ],
-    "workbench.colorTheme": "Material Theme Ocean",
+    "workbench.colorTheme": "Cobalt2",
     "materialTheme.fixIconsRunning": false,
     "workbench.iconTheme": "eq-material-theme-icons-ocean",
     "eslint.validate": [
