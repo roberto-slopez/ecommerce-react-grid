@@ -11,9 +11,9 @@
         120,
         140
     ],
-    "workbench.colorTheme": "Cobalt2",
+    "workbench.colorTheme": "Ayu Dark Bordered",
     "materialTheme.fixIconsRunning": false,
-    "workbench.iconTheme": "eq-material-theme-icons-ocean",
+    "workbench.iconTheme": "ayu",
     "eslint.validate": [
         "javascript",
         "javascriptreact",

@@ -17,14 +17,17 @@ import LocalOffer from '@material-ui/icons/LocalOffer';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import AttachMoney from '@material-ui/icons/AttachMoney';
 import Tooltip from '@material-ui/core/Tooltip';
-// TODO: implementar otra forma de animar el signo de agregar
-// import { withBounce } from 'react-motions';
+import Fab from '@material-ui/core/Fab';
 
 const styles = theme => ({
     card: {
         maxWidth: 400,
         margin: 2,
         height: '100%'
+    },
+    fab: {
+        bottom: 28,
+        right: -325
     },
     rootGrid: {
         paddingTop: theme.spacing.unit * 5
@@ -85,12 +88,15 @@ class ProductCard extends React.Component {
                                 ) : (
                                     ''
                                 )}
-                                <Chip icon={<AttachMoney />} color="primary" label={'50 USD'} className={classes.chip} />
                             </Typography>
                         }
                     />
                     <CardMedia className={classes.media} image={this.props.prefixUrl + this.props.img} title="Contemplative Reptile" />
+                    <Fab color="primary" className={classes.fab}>
+                        <Add />
+                    </Fab>
                     <CardContent>
+                        <Chip icon={<AttachMoney />} color="primary" label={this.props.price} className={classes.chip} />
                         <Typography component="p">{this.props.description}</Typography>
                     </CardContent>
                     <CardActions className={classes.actions} disableActionSpacing>
@@ -125,6 +131,7 @@ ProductCard.propTypes = {
     isChecked: PropTypes.bool,
     onSale: PropTypes.bool,
     unique: PropTypes.string,
+    price: PropTypes.number,
     handleCheck: PropTypes.function
 };
 

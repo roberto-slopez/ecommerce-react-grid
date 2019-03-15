@@ -140,6 +140,7 @@ class EGrid extends React.Component {
                                         tags={card.tags || []}
                                         isChecked={card.isChecked}
                                         unique={card.unique}
+                                        price={card.price}
                                         key={key}
                                     />
                                 );
