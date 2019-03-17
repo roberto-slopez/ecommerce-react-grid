@@ -11,7 +11,7 @@
         120,
         140
     ],
-    "workbench.colorTheme": "Ayu Dark Bordered",
+    "workbench.colorTheme": "Ayu Light Bordered",
     "materialTheme.fixIconsRunning": false,
     "workbench.iconTheme": "ayu",
     "eslint.validate": [

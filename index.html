@@ -25,7 +25,7 @@
             text: 'alex-munsell',
             img: 'alex-munsell-18753-unsplash.jpg',
             description:
-                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"
             //tags: ['verde', 'natural', 'Naranja']
         },
         {
@@ -35,16 +35,18 @@
             text: 'alex-loup',
             img: 'alex-loup-397220-unsplash.jpg',
             description:
-                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"
             //tags: ['carro', 'luz', 'bateria']
-        },
+        }
+    ];
+    var data2 = [
         {
             unique: '32',
             price: 76.24,
             text: 'asnim-asnim',
             img: 'asnim-asnim-142813-unsplash.jpg',
             description:
-                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"
             //tags: ['apple', 'blanco', 'sonido']
         },
         {
@@ -53,7 +55,7 @@
             text: 'brooke-lark',
             img: 'brooke-lark-194252-unsplash.jpg',
             description:
-                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"
             //tags: ['camion', 'atardecer', 'carretera']
         },
         {
@@ -62,7 +64,7 @@
             text: 'brooke-lark2',
             img: 'brooke-lark-289769-unsplash.jpg',
             description:
-                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"
             //tags: ['amarillo', 'botones', 'color']
         },
         {
@@ -71,7 +73,7 @@
             text: 'brooke-lark3',
             img: 'brooke-lark-331977-unsplash.jpg',
             description:
-                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"
             //tags: ['amarillo', 'verde', 'azul', 'blanco', 'playa']
         },
         {
@@ -80,21 +82,23 @@
             text: 'maria-mekht',
             img: 'maria-mekht-159066-unsplash.jpg',
             description:
-                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"
             //tags: ['amarillo', 'verde', 'azul', 'blanco', 'playa']
-        },
+        }
+    ];
+    var data3 = [
         {
             unique: '40',
             price: 16.24,
             text: 'robin-stickel',
             img: 'robin-stickel-82145-unsplash.jpg',
             description:
-                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"
             //tags: ['amarillo', 'verde', 'azul', 'blanco', 'playa']
         }
     ];
-
     var settings = {
+        currency: '$',
         /**
          * @cfg {function} callback
          */
@@ -125,8 +129,22 @@
          */
         brandColor: '#311B92'
     };
+    var groups = [
+        {
+            text: 'group1',
+            data: data
+        },
+        {
+            text: 'group2',
+            data: data2
+        },
+        {
+            text: 'group3',
+            data: data3
+        }
+    ];
     // eslint-disable-next-line
-    EReactGrid.renderAt(document.getElementById('root'), data, settings);
+    EReactGrid.renderAt(document.getElementById('root'), [], groups, settings);
   </script>
 </body>
 

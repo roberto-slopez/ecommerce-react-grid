@@ -7,15 +7,12 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
-import Checkbox from '@material-ui/core/Checkbox';
 import Add from '@material-ui/icons/Add';
-import Done from '@material-ui/icons/Done';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
 import LocalOffer from '@material-ui/icons/LocalOffer';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
-import AttachMoney from '@material-ui/icons/AttachMoney';
 import Tooltip from '@material-ui/core/Tooltip';
 import Fab from '@material-ui/core/Fab';
 
@@ -26,18 +23,17 @@ const styles = theme => ({
         height: '100%'
     },
     fab: {
-        bottom: 28,
-        right: -325
+        position: 'absolute',
+        right: 24,
+        bottom: -28
     },
     rootGrid: {
         paddingTop: theme.spacing.unit * 5
     },
     media: {
         height: 0,
+        position: 'relative',
         paddingTop: '56.25%'
-    },
-    chip: {
-        margin: 0.5
     },
     actions: {
         display: 'flex',
@@ -66,18 +62,6 @@ class ProductCard extends React.Component {
             <Grid xs={12} sm={3} className={classes.rootGrid}>
                 <Card className={classes.card}>
                     <CardHeader
-                        action={
-                            <Tooltip title="Agregar" placement="top">
-                                <Checkbox
-                                    icon={<Add />}
-                                    checkedIcon={<Done />}
-                                    checked={this.props.isChecked}
-                                    onChange={this.handleCheck}
-                                    value="true"
-                                    color="primary"
-                                />
-                            </Tooltip>
-                        }
                         title={
                             <Typography variant="title" gutterBottom>
                                 {this.props.text}
@@ -91,12 +75,16 @@ class ProductCard extends React.Component {
                             </Typography>
                         }
                     />
-                    <CardMedia className={classes.media} image={this.props.prefixUrl + this.props.img} title="Contemplative Reptile" />
-                    <Fab color="primary" className={classes.fab}>
-                        <Add />
-                    </Fab>
+                    <CardMedia className={classes.media} image={this.props.prefixUrl + this.props.img} title="Dev">
+                        <Fab color="primary" className={classes.fab}>
+                            <Add />
+                        </Fab>
+                    </CardMedia>
                     <CardContent>
-                        <Chip icon={<AttachMoney />} color="primary" label={this.props.price} className={classes.chip} />
+                        <Typography gutterBottom variant="h6">
+                            {this.props.currency}
+                            {this.props.price}
+                        </Typography>
                         <Typography component="p">{this.props.description}</Typography>
                     </CardContent>
                     <CardActions className={classes.actions} disableActionSpacing>
@@ -124,6 +112,7 @@ class ProductCard extends React.Component {
 ProductCard.propTypes = {
     classes: PropTypes.object.isRequired,
     text: PropTypes.string,
+    currency: PropTypes.string,
     img: PropTypes.string,
     description: PropTypes.string,
     prefixUrl: PropTypes.object.string,

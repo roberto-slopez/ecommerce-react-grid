@@ -4,12 +4,11 @@
 
 - node: Is the html node where the component is rendered
 - data: Is data ¯\\_(ツ)_/¯
-- settings:
-    - brandLogo :new:
-    - brandAlt :new:
-    - brandColor :new:
+- groups: Is a group of *data* elements
+- settings: 
 ```js
     var settings = {
+        currency: '$',
         /**
          * @cfg {function} callback
          */
@@ -41,7 +40,7 @@
         brandColor: '#311B92'
     };
 
-    EReactGrid.renderAt(document.getElementById('root'), data, settings);
+    EReactGrid.renderAt(document.getElementById('root'), data, groups, settings);
 ```
 NOTE: Data structure
 ```js

@@ -9,6 +9,14 @@ import AppBar from '@material-ui/core/AppBar';
 import MonetizationOn from '@material-ui/icons/MonetizationOn';
 import Avatar from '@material-ui/core/Avatar';
 import Fab from '@material-ui/core/Fab';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import LabelIcon from '@material-ui/icons/Label';
 
 import { lensPath, set } from 'ramda';
 
@@ -19,12 +27,19 @@ const styles = theme => ({
     root: {
         flexGrow: 1
     },
+    menuButton: {
+        marginLeft: 0,
+        marginRight: 0
+    },
     button: {
         margin: theme.spacing.unit,
         color: '#FFFFFF'
     },
     flex: {
         flexGrow: 1
+    },
+    list: {
+        width: 250
     },
     avatar: {
         margin: 10
@@ -37,6 +52,7 @@ const styles = theme => ({
     },
     fab: {
         margin: 0,
+        zIndex: 2,
         top: 'auto',
         right: 20,
         bottom: 20,
@@ -48,6 +64,8 @@ const styles = theme => ({
 class EGrid extends React.Component {
     state = {
         cards: this.props.cards,
+        groups: this.props.groups,
+        opendrawer: false,
         originalData: this.props.cards.slice()
     };
 
@@ -72,7 +90,16 @@ class EGrid extends React.Component {
 
         this.setState({ cards: updatedList });
     };
-
+    handleDrawerOpen = () => {
+        this.setState({ opendrawer: true });
+    };
+    handleClickGroup = e => {
+        let data = JSON.parse(e.currentTarget.dataset.items);
+        this.setState({ cards: data, originalData: data });
+    };
+    handleDrawerClose = () => {
+        this.setState({ opendrawer: false });
+    };
     /**
      * Dynamic modify object
      * @param {string} fieldPath name path object
@@ -103,7 +130,20 @@ class EGrid extends React.Component {
 
     render() {
         const { classes } = this.props;
-
+        const sideList = (
+            <div className={classes.list}>
+                <List>
+                    {this.state.groups.map(i => (
+                        <ListItem button key={i.text} onClick={this.handleClickGroup} data-items={JSON.stringify(i.data)}>
+                            <ListItemIcon>
+                                <LabelIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={i.text} />
+                        </ListItem>
+                    ))}
+                </List>
+            </div>
+        );
         return (
             <div className={classes.root}>
                 <Card>
@@ -113,12 +153,25 @@ class EGrid extends React.Component {
                         style={{ boxShadow: 'none', background: this.props.settings.brandColor }}
                     >
                         <Toolbar>
+                            <IconButton
+                                color="inherit"
+                                aria-label="Open menu"
+                                onClick={this.handleDrawerOpen}
+                                className={classes.menuButton}
+                            >
+                                <MenuIcon />
+                            </IconButton>
                             <AppSearch handleKeyDown={this.searchProduct} />
                             <span className={classes.flex} />
                             <Avatar alt={this.props.settings.brandAlt} src={this.props.settings.brandLogo} className={classes.avatar} />
                         </Toolbar>
                     </AppBar>
                     <CardContent>
+                        <Drawer open={this.state.opendrawer} onClose={this.handleDrawerClose}>
+                            <div tabIndex={0} role="button" onClick={this.handleDrawerClose} onKeyDown={this.handleDrawerClose}>
+                                {sideList}
+                            </div>
+                        </Drawer>
                         <Fab
                             color="secondary"
                             className={classes.fab}
@@ -141,6 +194,7 @@ class EGrid extends React.Component {
                                         isChecked={card.isChecked}
                                         unique={card.unique}
                                         price={card.price}
+                                        currency={this.props.settings.currency}
                                         key={key}
                                     />
                                 );
@@ -156,7 +210,8 @@ class EGrid extends React.Component {
 EGrid.propTypes = {
     classes: PropTypes.object.isRequired,
     cards: PropTypes.object.isRequired,
-    settings: PropTypes.object
+    settings: PropTypes.object,
+    groups: PropTypes.array
 };
 
 export default withStyles(styles)(EGrid);

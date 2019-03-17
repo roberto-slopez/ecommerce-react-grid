@@ -4,8 +4,9 @@ import ReactDOM from 'react-dom';
 import EGrid from './components/EGrid.jsx';
 
 module.exports = {
-    renderAt: function(node, cards, settings) {
+    renderAt: function(node, cards, groups, settings) {
         cards = cards || [];
+        groups = groups || [];
         //Add control check
         cards = cards.map(i => {
             i.isChecked = false;
@@ -13,7 +14,7 @@ module.exports = {
             return i;
         });
 
-        ReactDOM.render(<EGrid cards={cards} settings={settings} />, node);
+        ReactDOM.render(<EGrid cards={cards} settings={settings} groups={groups} />, node);
     },
     destroyAtNode: function(node) {
         ReactDOM.unmountComponentAtNode(node);
