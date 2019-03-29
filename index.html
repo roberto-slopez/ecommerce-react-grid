@@ -117,14 +117,6 @@
          */
         prefixUrl: 'img/',
         /**
-         * @cfg {string} logo url or path
-         */
-        brandLogo: 'img/brandlogo.png',
-        /**
-         * @cfg {string} alt for img brand logo
-         */
-        brandAlt: 'brandlogo',
-        /**
          * @cfg {string} brand color
          */
         brandColor: '#311B92'
@@ -143,8 +135,10 @@
             data: data3
         }
     ];
+    var cover = 'img/perfil.jpg';
+    var name = 'Nova';
     // eslint-disable-next-line
-    EReactGrid.renderAt(document.getElementById('root'), [], groups, settings);
+    EReactGrid.renderAt(document.getElementById('root'), [], groups, settings, cover, name);
   </script>
 </body>
 

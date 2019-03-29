@@ -5,9 +5,9 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import MonetizationOn from '@material-ui/icons/MonetizationOn';
-import Avatar from '@material-ui/core/Avatar';
 import Fab from '@material-ui/core/Fab';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -17,6 +17,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import LabelIcon from '@material-ui/icons/Label';
+import CardMedia from '@material-ui/core/CardMedia';
 
 import { lensPath, set } from 'ramda';
 
@@ -26,6 +27,22 @@ import ProductCard from './ProductCard';
 const styles = theme => ({
     root: {
         flexGrow: 1
+    },
+    card: {
+        //maxWidth: 400,
+        margin: 2,
+        height: '100%'
+    },
+    rootGrid: {
+        paddingTop: theme.spacing.unit * 5
+    },
+    media: {
+        height: 0,
+        position: 'relative',
+        paddingTop: '56.25%'
+    },
+    centerText: {
+        textAlign: 'center'
     },
     menuButton: {
         marginLeft: 0,
@@ -40,9 +57,6 @@ const styles = theme => ({
     },
     list: {
         width: 250
-    },
-    avatar: {
-        margin: 10
     },
     extendedIcon: {
         marginRight: theme.spacing.unit
@@ -64,6 +78,9 @@ const styles = theme => ({
 class EGrid extends React.Component {
     state = {
         cards: this.props.cards,
+        name: this.props.name,
+        cover: this.props.cover,
+        currentSelection: false,
         groups: this.props.groups,
         opendrawer: false,
         originalData: this.props.cards.slice()
@@ -95,7 +112,7 @@ class EGrid extends React.Component {
     };
     handleClickGroup = e => {
         let data = JSON.parse(e.currentTarget.dataset.items);
-        this.setState({ cards: data, originalData: data });
+        this.setState({ cards: data, originalData: data, currentSelection: e.currentTarget.textContent });
     };
     handleDrawerClose = () => {
         this.setState({ opendrawer: false });
@@ -124,6 +141,32 @@ class EGrid extends React.Component {
         this.updateList([correlative, 'isChecked'], !this.state[name][correlative].isChecked, name);
     };
 
+    getCover = () => {
+        const { classes } = this.props;
+
+        return [
+            <Grid xs={12} sm={6} className={classes.rootGrid} key={0}>
+                <Card className={classes.card}>
+                    <CardMedia className={classes.media} image={this.props.cover} title={this.props.name} />
+                </Card>
+            </Grid>,
+            <Grid xs={12} sm={6} className={classes.rootGrid} key={1}>
+                <Card className={classes.card}>
+                    <List>
+                        {this.state.groups.map(i => (
+                            <ListItem button key={i.text} onClick={this.handleClickGroup} data-items={JSON.stringify(i.data)}>
+                                <ListItemIcon>
+                                    <LabelIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={i.text} />
+                            </ListItem>
+                        ))}
+                    </List>
+                </Card>
+            </Grid>
+        ];
+    };
+
     getCheckeds = () => {
         this.props.settings.getChecks(this.state.cards.filter(i => i.isChecked));
     };
@@ -146,6 +189,9 @@ class EGrid extends React.Component {
         );
         return (
             <div className={classes.root}>
+                <Typography className={classes.centerText} variant="h2" gutterBottom>
+                    {this.state.currentSelection ? `${this.state.name} | ${this.state.currentSelection}` : this.state.name}
+                </Typography>
                 <Card>
                     <AppBar
                         position="static"
@@ -162,8 +208,6 @@ class EGrid extends React.Component {
                                 <MenuIcon />
                             </IconButton>
                             <AppSearch handleKeyDown={this.searchProduct} />
-                            <span className={classes.flex} />
-                            <Avatar alt={this.props.settings.brandAlt} src={this.props.settings.brandLogo} className={classes.avatar} />
                         </Toolbar>
                     </AppBar>
                     <CardContent>
@@ -181,24 +225,26 @@ class EGrid extends React.Component {
                             <MonetizationOn />
                         </Fab>
                         <Grid container spacing={40} direction="row" justify="flex-start" alignItems="stretch">
-                            {this.state.cards.map((card, key) => {
-                                return (
-                                    <ProductCard
-                                        handleCheck={this.handleCheck}
-                                        prefixUrl={this.props.settings.prefixUrl}
-                                        text={card.text}
-                                        img={card.img}
-                                        onSale={card.onSale}
-                                        description={card.description}
-                                        tags={card.tags || []}
-                                        isChecked={card.isChecked}
-                                        unique={card.unique}
-                                        price={card.price}
-                                        currency={this.props.settings.currency}
-                                        key={key}
-                                    />
-                                );
-                            }, this)}
+                            {this.state.cards.length === 0
+                                ? this.getCover()
+                                : this.state.cards.map((card, key) => {
+                                    return (
+                                        <ProductCard
+                                            handleCheck={this.handleCheck}
+                                            prefixUrl={this.props.settings.prefixUrl}
+                                            text={card.text}
+                                            img={card.img}
+                                            onSale={card.onSale}
+                                            description={card.description}
+                                            tags={card.tags || []}
+                                            isChecked={card.isChecked}
+                                            unique={card.unique}
+                                            price={card.price}
+                                            currency={this.props.settings.currency}
+                                            key={key}
+                                        />
+                                    );
+                                }, this)}
                         </Grid>
                     </CardContent>
                 </Card>
@@ -211,7 +257,9 @@ EGrid.propTypes = {
     classes: PropTypes.object.isRequired,
     cards: PropTypes.object.isRequired,
     settings: PropTypes.object,
-    groups: PropTypes.array
+    groups: PropTypes.array,
+    name: PropTypes.string,
+    cover: PropTypes.string
 };
 
 export default withStyles(styles)(EGrid);
