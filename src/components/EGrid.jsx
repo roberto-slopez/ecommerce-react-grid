@@ -72,12 +72,22 @@ const styles = theme => ({
         bottom: 20,
         left: 'auto',
         position: 'fixed'
+    },
+    fab2: {
+        margin: 0,
+        zIndex: 2,
+        top: 'auto',
+        right: 'auto',
+        bottom: 20,
+        left: 20,
+        position: 'fixed'
     }
 });
 
 class EGrid extends React.Component {
     state = {
         cards: this.props.cards,
+        isHiddenFab: this.props.isHiddenFab,
         name: this.props.name,
         cover: this.props.cover,
         currentSelection: false,
@@ -189,7 +199,7 @@ class EGrid extends React.Component {
         );
         return (
             <div className={classes.root}>
-                <Typography className={classes.centerText} variant="h2" gutterBottom>
+                <Typography className={classes.centerText} variant="h5" gutterBottom>
                     {this.state.currentSelection ? `${this.state.name} | ${this.state.currentSelection}` : this.state.name}
                 </Typography>
                 <Card>
@@ -199,14 +209,6 @@ class EGrid extends React.Component {
                         style={{ boxShadow: 'none', background: this.props.settings.brandColor }}
                     >
                         <Toolbar>
-                            <IconButton
-                                color="inherit"
-                                aria-label="Open menu"
-                                onClick={this.handleDrawerOpen}
-                                className={classes.menuButton}
-                            >
-                                <MenuIcon />
-                            </IconButton>
                             <AppSearch handleKeyDown={this.searchProduct} />
                         </Toolbar>
                     </AppBar>
@@ -216,32 +218,38 @@ class EGrid extends React.Component {
                                 {sideList}
                             </div>
                         </Drawer>
-                        <Fab
-                            color="secondary"
-                            className={classes.fab}
-                            onClick={this.getCheckeds}
-                            aria-label={this.props.settings.translation.getchecks}
-                        >
-                            <MonetizationOn />
+                        <Fab color="primary" aria-label="Open menu" className={classes.fab2} onClick={this.handleDrawerOpen}>
+                            <MenuIcon />
                         </Fab>
+                        {this.state.isHiddenFab && (
+                            <Fab
+                                color="secondary"
+                                className={classes.fab}
+                                onClick={this.getCheckeds}
+                                aria-label={this.props.settings.translation.getchecks}
+                            >
+                                <MonetizationOn />
+                            </Fab>
+                        )}
                         <Grid container spacing={40} direction="row" justify="flex-start" alignItems="stretch">
                             {this.state.cards.length === 0
                                 ? this.getCover()
                                 : this.state.cards.map((card, key) => {
                                     return (
                                         <ProductCard
-                                            handleCheck={this.handleCheck}
-                                            prefixUrl={this.props.settings.prefixUrl}
-                                            text={card.text}
-                                            img={card.img}
-                                            onSale={card.onSale}
-                                            description={card.description}
-                                            tags={card.tags || []}
-                                            isChecked={card.isChecked}
-                                            unique={card.unique}
-                                            price={card.price}
-                                            currency={this.props.settings.currency}
-                                            key={key}
+                                              handleCheck={this.handleCheck}
+                                              prefixUrl={this.props.settings.prefixUrl}
+                                              text={card.text}
+                                              img={card.img}
+                                              onSale={card.onSale}
+                                              description={card.description}
+                                              tags={card.tags || []}
+                                              isChecked={card.isChecked}
+                                              unique={card.unique}
+                                              price={card.price}
+                                              currency={this.props.settings.currency}
+                                              isHiddenFab={this.state.isHiddenFab}
+                                              key={key}
                                         />
                                     );
                                 }, this)}
@@ -259,7 +267,8 @@ EGrid.propTypes = {
     settings: PropTypes.object,
     groups: PropTypes.array,
     name: PropTypes.string,
-    cover: PropTypes.string
+    cover: PropTypes.string,
+    isHiddenFab: PropTypes.bool
 };
 
 export default withStyles(styles)(EGrid);

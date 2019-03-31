@@ -76,9 +76,11 @@ class ProductCard extends React.Component {
                         }
                     />
                     <CardMedia className={classes.media} image={this.props.prefixUrl + this.props.img} title="Dev">
-                        <Fab color="primary" className={classes.fab}>
-                            <Add />
-                        </Fab>
+                        {this.props.isHiddenFab && (
+                            <Fab color="primary" className={classes.fab}>
+                                <Add />
+                            </Fab>
+                        )}
                     </CardMedia>
                     <CardContent>
                         <Typography gutterBottom variant="h6">
@@ -119,6 +121,7 @@ ProductCard.propTypes = {
     tags: PropTypes.array,
     isChecked: PropTypes.bool,
     onSale: PropTypes.bool,
+    isHiddenFab: PropTypes.bool,
     unique: PropTypes.string,
     price: PropTypes.number,
     handleCheck: PropTypes.function
